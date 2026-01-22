@@ -32,7 +32,7 @@ export type Dictionary = {
   readonly about: {
     readonly title: string
     readonly subtitle: string
-    readonly description: string
+    readonly description: readonly string[]
     readonly experience: string
     readonly projects: string
     readonly clients: string
