@@ -40,9 +40,8 @@ export async function middleware(request: NextRequest) {
     return supabaseResponse
   }
   
-  // Update Supabase session for authenticated routes
-  const { supabaseResponse } = await updateSession(request)
-  return supabaseResponse
+// Public routes don't need Supabase session
+return NextResponse.next()
 }
 
 export const config = {
