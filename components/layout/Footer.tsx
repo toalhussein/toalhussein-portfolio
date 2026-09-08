@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { Github, Linkedin, Twitter, Mail, Heart } from 'lucide-react'
+import { Github, Linkedin, Twitter, Mail } from 'lucide-react'
 import { Locale } from '@/types'
 import { Dictionary } from '@/lib/i18n'
 
@@ -22,9 +22,9 @@ export function Footer({ locale, dictionary }: FooterProps) {
   const currentYear = new Date().getFullYear()
   
   return (
-    <footer className="border-t border-border bg-surface/50">
+    <footer className="border-t border-border bg-surface/60">
       <div className="container mx-auto px-4 md:px-6 py-12">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+        <div className="flex flex-col items-center justify-between gap-8 md:flex-row">
           {/* Logo & Copyright */}
           <div className="text-center md:text-start">
             <Link href={`/${locale}`} className="inline-block mb-3">
@@ -32,7 +32,7 @@ export function Footer({ locale, dictionary }: FooterProps) {
                 toalhussein
               </span>
             </Link>
-            <p className="text-foreground-secondary text-sm">
+            <p className="text-sm text-foreground-secondary">
               © {currentYear} {dictionary.footer.rights}
             </p>
           </div>
@@ -58,14 +58,14 @@ export function Footer({ locale, dictionary }: FooterProps) {
           </div>
           
           {/* Made with love */}
-          <div className="flex items-center gap-2 text-foreground-secondary text-sm">
+          <div className="text-sm text-foreground-secondary">
             <motion.span
               animate={{ scale: [1, 1.2, 1] }}
               transition={{ repeat: Infinity, duration: 1.5 }}
             >
             </motion.span>
-            <span>{dictionary.footer.by}</span>
-            <span className="text-primary font-medium">الحسين عبدالصبور</span>
+            <span>{dictionary.footer.madeWith} </span>
+            <span className="font-medium text-primary">Next.js + Supabase</span>
           </div>
         </div>
       </div>

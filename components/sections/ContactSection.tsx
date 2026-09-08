@@ -51,7 +51,7 @@ export function ContactSection({ locale, dictionary, fullPage = false }: Contact
       
       setSubmitStatus('success')
       reset()
-    } catch (error) {
+    } catch {
       setSubmitStatus('error')
     } finally {
       setIsSubmitting(false)
@@ -59,16 +59,17 @@ export function ContactSection({ locale, dictionary, fullPage = false }: Contact
   }
   
   const content = (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+    <div className="grid grid-cols-1 gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-12">
       {/* Contact Info */}
       <motion.div
         initial={{ opacity: 0, x: locale === 'ar' ? 30 : -30 }}
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true }}
-        className="space-y-8"
+        className="space-y-8 lg:pt-6"
       >
         <div>
-          <h3 className="text-2xl font-bold text-foreground mb-4">
+          <span className="eyebrow mb-4 block">{locale === 'ar' ? 'ابدأ محادثة' : 'START A CONVERSATION'}</span>
+          <h3 className="mb-4 text-3xl font-bold text-foreground md:text-4xl">
             {t.subtitle}
           </h3>
           <p className="text-foreground-secondary leading-relaxed">
@@ -86,7 +87,7 @@ export function ContactSection({ locale, dictionary, fullPage = false }: Contact
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
               whileHover={{ x: locale === 'ar' ? -5 : 5 }}
-              className="flex items-center gap-4 p-4 rounded-xl bg-surface border border-border hover:border-primary/50 hover:shadow-glow-sm transition-all duration-300"
+              className="flex items-center gap-4 rounded-2xl border border-border bg-surface/80 p-4 transition-all duration-300 hover:border-primary/50 hover:shadow-glow-sm"
             >
               <div className="w-12 h-12 rounded-lg bg-primary/20 flex items-center justify-center">
                 <info.icon size={24} className="text-primary" />
@@ -104,7 +105,7 @@ export function ContactSection({ locale, dictionary, fullPage = false }: Contact
         viewport={{ once: true }}
       >
         <Card variant="glow">
-          <CardContent className="p-6 md:p-8">
+          <CardContent className="p-6 md:p-8 lg:p-10">
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
               <Input
                 id="name"

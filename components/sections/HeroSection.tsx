@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { ArrowDown, Send, Code2, Sparkles, Smartphone, Download } from 'lucide-react'
+import { Send, Code2, Sparkles, Smartphone, Download } from 'lucide-react'
 import { Locale } from '@/types'
 import { Dictionary } from '@/lib/i18n'
 import { Button } from '@/components/ui'
@@ -14,6 +14,7 @@ interface HeroSectionProps {
   cvUrl?: string | null
 }
 
+
 // Floating icons configuration
 const floatingIcons = [
   { Icon: Sparkles, position: 'top-1/4 start-[10%]', delay: 0, duration: 3 },
@@ -24,21 +25,13 @@ const floatingIcons = [
 
 // Typewriter effect component with loop
 function TypewriterText({ text, delay = 0 }: { text: string; delay?: number }) {
-  const [mounted, setMounted] = useState(false)
   const [displayedText, setDisplayedText] = useState(text)
   const [currentIndex, setCurrentIndex] = useState(text.length)
   const [isDeleting, setIsDeleting] = useState(false)
   const [hasStarted, setHasStarted] = useState(false)
 
-  // Mount effect
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
   // Start animation after delay
   useEffect(() => {
-    if (!mounted) return
-    
     const delayTimeout = setTimeout(() => {
       setHasStarted(true)
       setCurrentIndex(0)
@@ -46,7 +39,7 @@ function TypewriterText({ text, delay = 0 }: { text: string; delay?: number }) {
     }, delay)
 
     return () => clearTimeout(delayTimeout)
-  }, [mounted, delay])
+  }, [delay])
 
   // Typewriter animation
   useEffect(() => {
@@ -84,7 +77,7 @@ function TypewriterText({ text, delay = 0 }: { text: string; delay?: number }) {
   return (
     <span className="inline-block" suppressHydrationWarning>
       {displayedText}
-      {mounted && hasStarted && (
+      {hasStarted && (
         <motion.span
           animate={{ opacity: [1, 0] }}
           transition={{ duration: 0.5, repeat: Infinity, repeatType: "reverse" }}
@@ -129,7 +122,7 @@ export function HeroSection({ locale, dictionary, cvUrl }: HeroSectionProps) {
   }
 
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
+    <section className="surface-grid relative flex min-h-screen items-center justify-center overflow-hidden border-b border-border pt-24">
       {/* Background gradient effects */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 start-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[128px] animate-pulse" />
@@ -160,14 +153,14 @@ export function HeroSection({ locale, dictionary, cvUrl }: HeroSectionProps) {
         </motion.div>
       ))}
 
-      <div className="container mx-auto px-4 md:px-6 relative z-10">
-        <div className="max-w-4xl mx-auto text-center">
+      <div className="container relative z-10 mx-auto px-4 md:px-6">
+        <div className="mx-auto max-w-5xl text-center">
           {/* Greeting */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-primary text-lg md:text-xl mb-4 font-medium"
+            className="eyebrow mb-5 text-sm md:text-base"
           >
             {t.greeting}
           </motion.p>
@@ -181,7 +174,7 @@ export function HeroSection({ locale, dictionary, cvUrl }: HeroSectionProps) {
               scale: 1.05,
               textShadow: "0 0 20px rgba(59, 130, 246, 0.5)",
             }}
-            className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground mb-4 relative cursor-default transition-all duration-300"
+            className="relative mb-5 cursor-default text-4xl font-bold tracking-tight text-foreground transition-all duration-300 md:text-6xl lg:text-8xl"
             style={{
               textShadow: '0 0 40px rgba(59, 130, 246, 0.3), 0 0 80px rgba(59, 130, 246, 0.2)'
             }}
@@ -209,7 +202,7 @@ export function HeroSection({ locale, dictionary, cvUrl }: HeroSectionProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="text-2xl md:text-4xl lg:text-5xl font-bold mb-6 min-h-[3rem] md:min-h-[4rem] lg:min-h-[5rem]"
+            className="mb-7 min-h-[3rem] text-2xl font-bold md:text-4xl lg:min-h-[5rem] lg:text-6xl"
           >
             <span className="bg-gradient-to-r from-primary via-accent to-primary bg-[length:200%_auto] animate-gradient bg-clip-text text-transparent">
               <TypewriterText text={t.title} delay={800} />
@@ -221,7 +214,7 @@ export function HeroSection({ locale, dictionary, cvUrl }: HeroSectionProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
-            className="text-foreground-secondary text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed"
+            className="mx-auto mb-10 max-w-2xl text-lg leading-relaxed text-foreground-secondary md:text-xl"
           >
             {t.subtitle}
           </motion.p>
@@ -231,7 +224,7 @@ export function HeroSection({ locale, dictionary, cvUrl }: HeroSectionProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+            className="flex flex-col items-center justify-center gap-4 sm:flex-row"
           >
             <Link href={`/${locale}#projects`}>
               <motion.div

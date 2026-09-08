@@ -3,26 +3,26 @@
 /* Design System - Dark Neon Theme */
 :root {
   /* Backgrounds */
-  --background: #070A12;
-  --background-surface: #0B1220;
-  --background-surface-light: #101827;
+  --background: #05070d;
+  --background-surface: #0a1020;
+  --background-surface-light: #111a2d;
   
   /* Primary colors - Neon Blue */
-  --primary: #3B82F6;
-  --primary-hover: #2563EB;
+  --primary: #60a5fa;
+  --primary-hover: #3b82f6;
   --primary-light: rgba(59, 130, 246, 0.2);
   
   /* Accent - Cyan */
-  --accent: #22D3EE;
+  --accent: #67e8f9;
   --accent-light: rgba(34, 211, 238, 0.2);
   
   /* Text colors */
-  --foreground: #E5E7EB;
-  --foreground-secondary: #9CA3AF;
+  --foreground: #f8fafc;
+  --foreground-secondary: #a6b1c5;
   
   /* Borders */
-  --border: rgba(59, 130, 246, 0.25);
-  --border-hover: rgba(59, 130, 246, 0.5);
+  --border: rgba(148, 163, 184, 0.16);
+  --border-hover: rgba(96, 165, 250, 0.55);
   
   /* Shadows - Glow effects */
   --shadow-glow: 0 0 24px rgba(59, 130, 246, 0.35);
@@ -62,13 +62,21 @@
 /* Base styles */
 html {
   scroll-behavior: smooth;
+  background: var(--background);
 }
 
 body {
-  background: var(--background);
+  background:
+    radial-gradient(circle at 10% 0%, rgba(37, 99, 235, 0.12), transparent 32rem),
+    radial-gradient(circle at 90% 20%, rgba(34, 211, 238, 0.08), transparent 28rem),
+    var(--background);
   color: var(--foreground);
   font-family: var(--font-latin);
   min-height: 100vh;
+}
+
+section[id] {
+  scroll-margin-top: 6rem;
 }
 
 /* RTL support */
@@ -147,7 +155,34 @@ html[dir="rtl"] body {
 
 /* Container utility */
 .container {
-  max-width: 1200px;
+  max-width: 1240px;
+}
+
+.eyebrow {
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.surface-grid {
+  background-image:
+    linear-gradient(rgba(148, 163, 184, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.045) 1px, transparent 1px);
+  background-size: 2.5rem 2.5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 /* RTL utilities */

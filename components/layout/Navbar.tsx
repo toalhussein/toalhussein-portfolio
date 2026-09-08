@@ -7,7 +7,6 @@ import { Menu, X } from 'lucide-react'
 import { Locale } from '@/types'
 import { Dictionary } from '@/lib/i18n'
 import { LanguageToggle } from './LanguageToggle'
-import { cn } from '@/lib/utils'
 
 interface NavbarProps {
   locale: Locale
@@ -28,22 +27,25 @@ export function Navbar({ locale, dictionary, hasWorks = true }: NavbarProps) {
   ]
   
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/75 backdrop-blur-xl">
       <nav className="container mx-auto px-4 md:px-6">
-        <div className="flex items-center justify-between h-16 md:h-20">
+        <div className="flex h-16 items-center justify-between md:h-20">
           {/* Logo */}
-          <Link href={`/${locale}`} className="flex items-center gap-2">
+          <Link href={`/${locale}`} className="group flex items-center gap-3">
+            <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-primary/40 bg-primary/10 text-sm font-bold text-primary shadow-glow-sm">
+              T
+            </span>
             <motion.span
               initial={{ opacity: 0, x: locale === 'ar' ? 20 : -20 }}
               animate={{ opacity: 1, x: 0 }}
-              className="text-xl md:text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"
+              className="text-lg font-bold tracking-tight text-foreground transition-colors group-hover:text-primary md:text-xl"
             >
               toalhussein
             </motion.span>
           </Link>
           
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden items-center gap-7 md:flex">
             {navItems.map((item, index) => (
               <motion.div
                 key={item.href}
@@ -53,7 +55,7 @@ export function Navbar({ locale, dictionary, hasWorks = true }: NavbarProps) {
               >
                 <Link
                   href={item.href}
-                  className="text-foreground-secondary hover:text-primary transition-colors duration-200 font-medium"
+                  className="relative py-2 text-sm font-medium text-foreground-secondary transition-colors duration-200 hover:text-primary"
                 >
                   {item.label}
                 </Link>
@@ -84,7 +86,7 @@ export function Navbar({ locale, dictionary, hasWorks = true }: NavbarProps) {
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.2 }}
-              className="md:hidden overflow-hidden"
+              className="overflow-hidden border-t border-border md:hidden"
             >
               <div className="py-4 space-y-2">
                 {navItems.map((item, index) => (
