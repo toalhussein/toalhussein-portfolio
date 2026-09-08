@@ -2,7 +2,7 @@ import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import { getCurrentCV } from '@/lib/actions/cv'
 import { CVUpload } from '@/components/admin/CVUpload'
-import { Card, CardContent } from '@/components/ui'
+import { Card } from '@/components/ui'
 import { FileText } from 'lucide-react'
 
 export const metadata = {

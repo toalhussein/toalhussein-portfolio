@@ -1,5 +1,6 @@
 import { createClient as createServerClient } from '@/lib/supabase/server'
 import { AdminStatsGrid } from '@/components/admin/AdminStatsGrid'
+import Link from 'next/link'
 import { FolderGit2, Briefcase, Mail } from 'lucide-react'
 
 export const dynamic = 'force-dynamic'
@@ -41,27 +42,27 @@ export default async function AdminDashboardPage() {
             إجراءات سريعة
           </h2>
           <div className="space-y-3">
-            <a
+            <Link
               href="/admin/projects/new"
               className="flex items-center gap-3 p-3 rounded-lg bg-surface-light hover:bg-primary/10 hover:border-primary/30 border border-border transition-colors"
             >
               <FolderGit2 size={20} className="text-primary" />
               <span>إضافة مشروع جديد</span>
-            </a>
-            <a
+            </Link>
+            <Link
               href="/admin/works/new"
               className="flex items-center gap-3 p-3 rounded-lg bg-surface-light hover:bg-primary/10 hover:border-primary/30 border border-border transition-colors"
             >
               <Briefcase size={20} className="text-primary" />
               <span>إضافة عمل جديد</span>
-            </a>
-            <a
+            </Link>
+            <Link
               href="/admin/messages"
               className="flex items-center gap-3 p-3 rounded-lg bg-surface-light hover:bg-primary/10 hover:border-primary/30 border border-border transition-colors"
             >
               <Mail size={20} className="text-primary" />
               <span>عرض الرسائل</span>
-            </a>
+            </Link>
           </div>
         </div>
         

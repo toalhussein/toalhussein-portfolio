@@ -133,7 +133,7 @@ export default function NewProjectPage() {
       
       router.push('/admin/projects')
       router.refresh()
-    } catch (err) {
+    } catch {
       setError('حدث خطأ غير متوقع')
     } finally {
       setIsLoading(false)

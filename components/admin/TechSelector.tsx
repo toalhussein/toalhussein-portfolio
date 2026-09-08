@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { createClient } from '@/lib/supabase'
 import { Tech } from '@/types'
 import { X } from 'lucide-react'
@@ -12,7 +12,6 @@ interface TechSelectorProps {
 
 export function TechSelector({ value, onChange }: TechSelectorProps) {
   const [allTech, setAllTech] = useState<Tech[]>([])
-  const [selectedTech, setSelectedTech] = useState<Tech[]>([])
   const [searchTerm, setSearchTerm] = useState('')
   const [isOpen, setIsOpen] = useState(false)
 
@@ -30,15 +29,13 @@ export function TechSelector({ value, onChange }: TechSelectorProps) {
     fetchTech()
   }, [])
 
-  // Update selected tech when value changes
-  useEffect(() => {
+  // Derived state: selected tech based on value
+  const selectedTech = useMemo(() => {
     if (allTech.length > 0 && value.length > 0) {
-      const selected = allTech.filter(tech => value.includes(tech.id))
-      setSelectedTech(selected)
-    } else {
-      setSelectedTech([])
+      return allTech.filter(tech => value.includes(tech.id))
     }
-  }, [value, allTech])
+    return []
+  }, [allTech, value])
 
   const filteredTech = allTech.filter(tech => 
     tech.name.toLowerCase().includes(searchTerm.toLowerCase()) &&

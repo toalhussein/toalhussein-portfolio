@@ -29,10 +29,8 @@ interface AdminSidebarProps {
   onCloseMobileMenu?: () => void
 }
 
-export function AdminSidebar({ isMobileMenuOpen = false, onCloseMobileMenu }: AdminSidebarProps) {
-  const pathname = usePathname()
-  
-  const SidebarContent = () => (
+function SidebarContent({ pathname, onCloseMobileMenu }: { pathname: string; onCloseMobileMenu?: () => void }) {
+  return (
     <>
       {/* Logo */}
       <div className="p-6 border-b border-border flex items-center justify-between">
@@ -100,12 +98,16 @@ export function AdminSidebar({ isMobileMenuOpen = false, onCloseMobileMenu }: Ad
       </div>
     </>
   )
+}
+
+export function AdminSidebar({ isMobileMenuOpen = false, onCloseMobileMenu }: AdminSidebarProps) {
+  const pathname = usePathname()
   
   return (
     <>
       {/* Desktop Sidebar */}
       <aside className="w-64 min-h-screen bg-surface border-e border-border hidden lg:flex lg:flex-col">
-        <SidebarContent />
+        <SidebarContent pathname={pathname} onCloseMobileMenu={onCloseMobileMenu} />
       </aside>
       
       {/* Mobile Drawer */}
@@ -129,7 +131,7 @@ export function AdminSidebar({ isMobileMenuOpen = false, onCloseMobileMenu }: Ad
               transition={{ type: 'tween', duration: 0.3 }}
               className="fixed top-0 start-0 bottom-0 w-64 bg-surface border-e border-border z-50 lg:hidden flex flex-col"
             >
-              <SidebarContent />
+              <SidebarContent pathname={pathname} onCloseMobileMenu={onCloseMobileMenu} />
             </motion.aside>
           </>
         )}

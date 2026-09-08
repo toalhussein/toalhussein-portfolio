@@ -55,8 +55,7 @@ export default function EditWorkPage() {
           end_date: workData.end_date || '',
           published: workData.published ?? true,
         })
-      } catch (err) {
-        console.error('Error fetching work:', err)
+      } catch {
         setError('فشل في تحميل بيانات العمل')
       } finally {
         setIsFetching(false)

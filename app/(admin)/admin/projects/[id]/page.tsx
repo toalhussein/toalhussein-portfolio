@@ -212,7 +212,7 @@ export default function EditProjectPage() {
       
       router.push('/admin/projects')
       router.refresh()
-    } catch (err) {
+    } catch {
       setError('حدث خطأ غير متوقع')
     } finally {
       setIsLoading(false)
